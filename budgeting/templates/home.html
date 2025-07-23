@@ -1,0 +1,29 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Welcome {{ request.user.username }}!</h2>
+  
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+{% endblock %}
+
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Budget Summary</h2>
+
+  <div style="padding: 10px; background: #e0ffe0; border-radius: 10px; margin-bottom: 10px;">
+    <strong>Total Income:</strong> ${{ total_income }}
+  </div>
+
+  <div style="padding: 10px; background: #ffe0e0; border-radius: 10px; margin-bottom: 10px;">
+    <strong>Total Expenses:</strong> ${{ total_expenses }}
+  </div>
+
+  <div style="padding: 10px; background: #e0e0ff; border-radius: 10px;">
+    <strong>Balance:</strong> ${{ balance }}
+  </div>
+{% endblock %}
