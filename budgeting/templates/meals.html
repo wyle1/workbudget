@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Track Your Meals</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Meal</button>
+  </form>
+
+  <hr>
+
+  <h3>Meal Summary</h3>
+  <p><strong>Total Calories:</strong> {{ total_calories }}</p>
+  <p><strong>Total Protein:</strong> {{ total_protein }}g</p>
+
+  <h3>Meal Log</h3>
+  <ul>
+    {% for meal in meals %}
+      <li>{{ meal.date }}: {{ meal.name }} — {{ meal.calories }} kcal, {{ meal.protein }}g protein</li>
+    {% empty %}
+      <li>No meals logged yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

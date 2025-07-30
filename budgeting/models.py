@@ -30,3 +30,21 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.category} - {self.amount}"
+    
+class Meal(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    calories = models.PositiveIntegerField()
+    protein = models.PositiveIntegerField(help_text="Grams of protein")
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.calories} kcal"
+
+class WishItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    cost = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.name} - ${self.cost}"

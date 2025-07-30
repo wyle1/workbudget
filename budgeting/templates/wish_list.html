@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load math_filters %}
+
+{% block content %}
+  <h2>Wish List</h2>
+
+  <p><strong>Total Income:</strong> ${{ total_income|floatformat:2 }}</p>
+  <p><strong>Total Expenses:</strong> ${{ total_expenses|floatformat:2 }}</p>
+  <p><strong>Net Budget:</strong> ${{ net_budget|floatformat:2 }}</p>
+  <p><strong>80% of Budget:</strong> ${{ eighty_percent_budget|floatformat:2 }}</p>
+
+  <hr>
+
+  <h3>Add a New Wish</h3>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add to Wish List</button>
+  </form>
+
+  <hr>
+
+  <h3>Wish List Items</h3>
+  <ul>
+  {% for wish in wish_list %}
+    <li>
+      {{ wish.name }} - ${{ wish.cost|floatformat:2 }}
+      {% if wish.cost > eighty_percent_budget %}
+        <span style="color: red;">(Over 80% of net budget!)</span>
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>No wishes yet.</li>
+  {% endfor %}
+  </ul>
+
+{% endblock %}

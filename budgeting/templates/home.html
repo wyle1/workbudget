@@ -14,7 +14,8 @@
   <h3>Budget Summary</h3>
   <p><strong>Total Income:</strong> ${{ total_income }}</p>
   <p><strong>Total Expenses:</strong> ${{ total_expenses }}</p>
-  <p><strong>Net Balance:</strong> ${{ net_balance }}</p>
+  <p><strong>Net Budget:</strong> ${{ net_budget }}</p>
 
   <a href="{% url 'add_transaction' %}">Add New Transaction</a>
+  <a href="{% url 'wish_list' %}">Wish List</a>
 {% endblock %}
